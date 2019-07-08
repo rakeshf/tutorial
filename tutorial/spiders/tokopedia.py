@@ -18,7 +18,7 @@ class TokopediaSpider(scrapy.Spider):
         item = {}
         product = response.css("#content-container")
         item["title"] = response.css('h1.rvm-product-title span::text').extract_first()
-        item['category'] = response.css('.breadcrumb li[itemprop="itemListElement"] a span::text')
+        item['category'] = response.css('.breadcrumb li[itemprop="itemListElement"] a span::text').extract()[1]
         item['description'] = ''.join(response.css('#info::text').extract())
         item['price'] = response.css('span[itemprop="price"]::text').extract_first()
         yield item
